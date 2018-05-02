@@ -1,13 +1,56 @@
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="res/css/app.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
 </head>
 <body style='background-color:#bbcccc'>
+	<div id="initializer" > Pick your player: 
+
+	</div>
+
 	<div style="margin-left: 12px;margin-top: 12px">
 	<canvas id="elephantGame" width='850' height='600'></canvas>
 	</div>
-	<div id='status-bar'></div>
+	<!--modal dialog starts-->
+
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+
+	  <!-- Modal content -->
+	  <!--div class="modal-content">
+		<div class="modal-header">
+		  <span class="close">&times;</span>
+		  <h2>Modal Header</h2>
+		</div>
+		<div class="modal-body">
+		  <p>Enter your name</p><input type="text" placeholder="Your name...">
+		  <p>Select Game Option...</p>
+		  <form action="">
+			  <input type="radio" name="gameOption" value="singlePlayer"> Single Player<br>
+			  <input type="radio" name="gameOption" value="multiPlayer1"> Multi player in same machine<br>
+			  <input type="radio" name="gameOption" value="multiPlayer2"> Multi player in different machine
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <h3>Modal Footer</h3>
+		</div>
+	  </div-->
+
+	</div>
+	<!---->
 	<img id='elephant' src='res/img/Elephant_Archigraphs.png' width=25 height=25 style='display:none'></img>
 	<img id='sheep' src='res/img/BritishSheep_Archigraphs1.png' width=25 height=25 style='display:none'></img>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script type='text/javascript' src="res/js/GameInitializer.js" ></script>
+	<script type='text/javascript' src="res/js/GameView.js" ></script>
+	<script type='text/javascript' src="res/js/GameModel.js" ></script>
+	<script type='text/javascript' src="res/js/GameController.js" ></script>
 	<script type='text/javascript' src="res/js/app.js" ></script>
+
+<script>
+  //var socket = io();
+  debugger;
+   
+</script>
 </body>
 </html>
