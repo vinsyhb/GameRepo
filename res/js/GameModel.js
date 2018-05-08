@@ -213,18 +213,18 @@ GameModel.prototype.getInitialGameData = function(canvasWidth, canvasHeight){
 		var width1 = Math.sqrt(hyp1*hyp1 - height1*height1);
 		this.gameData.movablePoints.push({ x : canWidth/2 - width1, y : secondHorizontalLineUnit, occupied:false, position:13});
 		this.gameData.movablePoints.push({ x: canWidth/2 + width1, y : secondHorizontalLineUnit, occupied:false, position:15});
-		this.gameData.movablePoints.push({ x: distance*5, y : firstHorizontalLineUnit- distance*5, occupied:false,position:2});
-		this.gameData.movablePoints.push({ x: distance*5, y : firstHorizontalLineUnit,occupied:false,position:5});
-		this.gameData.movablePoints.push({ x: data['endingPoint'].x, y : firstHorizontalLineUnit,occupied:false,position:4});
-		this.gameData.movablePoints.push({ x: data['endingPoint'].x, y : secondHorizontalLineUnit,occupied:false,position:11});
-		this.gameData.movablePoints.push({ x: distance*5, y : secondHorizontalLineUnit,occupied:false,position:12});
-		this.gameData.movablePoints.push({ x: distance*5, y : secondHorizontalLineUnit+distance*5,occupied:false,position:18});
-		this.gameData.movablePoints.push({ x: canWidth - distance*5, y : firstHorizontalLineUnit- distance*5, occupied:false,position:3});
-		this.gameData.movablePoints.push({ x: canWidth - distance*5, y : firstHorizontalLineUnit,occupied:false,position:9});
-		this.gameData.movablePoints.push({ x: canWidth, y : firstHorizontalLineUnit,occupied:false,position:10});
-		this.gameData.movablePoints.push({ x: canWidth - distance*5, y : secondHorizontalLineUnit+distance*5,occupied:false,position:19});
-		this.gameData.movablePoints.push({ x: canWidth - distance*5, y : secondHorizontalLineUnit,occupied:false,position:16});
-		this.gameData.movablePoints.push({ x: canWidth, y : secondHorizontalLineUnit,occupied:false,position:17});
+		this.gameData.movablePoints.push({ x: distance*10, y : firstHorizontalLineUnit- distance*5, occupied:false,position:2});
+		this.gameData.movablePoints.push({ x: distance*10, y : firstHorizontalLineUnit,occupied:false,position:5});
+		this.gameData.movablePoints.push({ x: data['startingPoint'].x, y : firstHorizontalLineUnit,occupied:false,position:4});
+		this.gameData.movablePoints.push({ x: data['startingPoint'].x, y : secondHorizontalLineUnit,occupied:false,position:11});
+		this.gameData.movablePoints.push({ x: distance*10, y : secondHorizontalLineUnit,occupied:false,position:12});
+		this.gameData.movablePoints.push({ x: distance*10, y : secondHorizontalLineUnit+distance*5,occupied:false,position:18});
+		this.gameData.movablePoints.push({ x: data.endingPoint.x - distance*10, y : firstHorizontalLineUnit- distance*5, occupied:false,position:3});
+		this.gameData.movablePoints.push({ x: data.endingPoint.x - distance*10, y : firstHorizontalLineUnit,occupied:false,position:9});
+		this.gameData.movablePoints.push({ x: data['endingPoint'].x, y : firstHorizontalLineUnit,occupied:false,position:10});
+		this.gameData.movablePoints.push({ x: data.endingPoint.x - distance*10, y : secondHorizontalLineUnit+distance*5,occupied:false,position:19});
+		this.gameData.movablePoints.push({ x: data.endingPoint.x - distance*10, y : secondHorizontalLineUnit,occupied:false,position:16});
+		this.gameData.movablePoints.push({ x: data['endingPoint'].x, y : secondHorizontalLineUnit,occupied:false,position:17});
 		var elephants_local = this.gameData.movablePoints.filter(function(shape){
 			switch(shape.position){
 				case 1:
@@ -444,11 +444,11 @@ GameModel.prototype.getInitialGameData = function(canvasWidth, canvasHeight){
 			}else if(shape.position == 17){
 					depends = filterItems(that.gameData.movablePoints,'position',16);
 					depends = depends.concat(filterItems(that.gameData.movablePoints,'position',19));
+					depends = depends.concat(filterItems(that.gameData.movablePoints,'position',15));
 					if(isEleph){
 						depends.push({
 							16:filterItems(that.gameData.movablePoints,'position',15)
 						});
-						depends = depends.concat(filterItems(that.gameData.movablePoints,'position',15));
 					}
 					validPointsMap[17] = depends;
 			}else if(shape.position == 18){
