@@ -1,5 +1,5 @@
 {
-  "name": "vinsyhb.github.io",
+  "name": "GameRepo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinsyhb/vinsyhb.github.io.git"
+    "url": "git+https://github.com/vinsyhb/GameRepo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vinsyhb/vinsyhb.github.io/issues"
+    "url": "https://github.com/vinsyhb/GameRepo/issues"
   },
-  "homepage": "https://github.com/vinsyhb/vinsyhb.github.io#readme",
+  "homepage": "https://github.com/vinsyhb/GameRepo#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
