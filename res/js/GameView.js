@@ -43,7 +43,6 @@ function GameView( canvasElem, domElem ,modalElem ){
 }
 
 GameView.prototype.render = function( data ){
-		//debugger;
 		this.gameHeader = new GameHeader( this.domElem, this.user, this.elephant, this.sheep, this.opponent );
 		this.gameHeader.render();
 		this.gameHeader.playerSelected = this.playerSelected.bind(this);
@@ -51,10 +50,8 @@ GameView.prototype.render = function( data ){
 		this.renderGame(true);
 		this.initialize1();
 		this.drawOutLine(data);
-		//this.checkForWin();
 }
 GameView.prototype.playerSelected = function( data ){
-//	debugger;
 	this.saveGameOptions( data, this.waitForMatch.bind(this) );
 }
 GameView.prototype.getDimensions = function(){
@@ -65,11 +62,9 @@ GameView.prototype.getDimensions = function(){
 
 }
 GameView.prototype.initialize1 = function(){
-	//debugger;
 
 	var that = this;
 	this.socket.on( 'matchFound', function( user ){
-         // debugger;
 		  console.log('MATCH FOUND');
 		  var user = JSON.parse(user);
 		  if(user.elephant == that.elephant.name){
@@ -113,7 +108,6 @@ GameView.prototype.renderGame = function(gameInProgress){
 	var that = this;
 	if(this.elephant.name && this.sheep.name)
 	this.getGameData(this.elephant.name, this.sheep.name,gameInProgress, function(data){
-		//debugger;
 		that.gameData = data;
 		that.clearGameArea();
 		that.drawOutLine(data.lineData);
@@ -296,7 +290,6 @@ GameView.prototype.canvasMouseDownListener = function(event){
 							}
 							if(checkForObject(depend[position][0],xCor,yCor) ){
 								//Dependent clicked
-								//debugger;
 								that.gameData.objectMap[that.selectedObject.position].occupied = null;
 								that.selectedObject.position = depend[position][0].position;
 								depend[position][0].occupied  =null;
@@ -328,7 +321,6 @@ GameView.prototype.canvasMouseDownListener = function(event){
 						}
 						if(checkForObject(that.dependents[i],xCor,yCor)){
 							//Dependent clicked
-						//	debugger;
 							that.gameData.objectMap[that.selectedObject.position].occupied = null;
 							that.selectedObject.position = that.dependents[i].position;
 							that.dependents[i].occupied = null;
@@ -358,13 +350,11 @@ GameView.prototype.canvasMouseDownListener = function(event){
 					that.redrawGame();
 					that.sheepToMove = true;
 					that.drawSheepsPlace(true, that.gameData)
-					//debugger;
 				}else{
 					that.drawSheepsPlace(false,that.gameData);
 				}
 			}
 			if( that.sheepToMove ){
-			//	debugger;
 				for(var i=0 ; i < that.gameData.movablePoints.length ; i++ ){
 					if(checkForObject(that.gameData.movablePoints[i],xCor,yCor)){
 						var clickedObject = that.gameData.movablePoints[i];
@@ -380,6 +370,46 @@ GameView.prototype.canvasMouseDownListener = function(event){
 						break;
 					}
 				}	
+			}
+			if( that.gameData.sheepsLeft == 0 && that.gameData.whoseMove == 'sheep'){
+				var objectFound1 = false;
+				for(var i=0 ; i < that.gameData.sheeps.length ; i++ ){
+					if( checkForObject( that.gameData.sheeps[i],xCor,yCor ) ){
+	
+						var clickedObject = that.gameData.sheeps[i];
+						var depends = that.gameData.sheepValidPoints[clickedObject.position];
+						that.selectedObject = clickedObject;
+						for(var j=0;j<depends.length;j++){
+							console.log('creating object at('+depends[j].x+':'+depends[j].y+')');
+							that.temporary.push(depends[j]);
+							if(!that.gameData.objectMap[depends[j].position].occupied){
+								that.drawRectangle(depends[j].x,depends[j].y,5,5,'red');
+							}
+						}
+						objectFound1 = true;
+						that.sheepDependents = depends;
+						//that.redrawGame();
+						that.sheepToMoveDep = true;
+						break;
+					}
+				}
+				if( !objectFound1 && that.sheepToMoveDep ){
+					for( var i=0;i<that.sheepDependents.length;i++){
+						if(checkForObject(that.sheepDependents[i],xCor,yCor)){
+							that.gameData.objectMap[that.selectedObject.position].occupied = null;
+							that.selectedObject.position = that.sheepDependents[i].position;
+							if(!that.movableObject){
+								that.movableObject = {};
+							}
+							that.movableObject.x = that.sheepDependents[i].x;
+							that.movableObject.y = that.sheepDependents[i].y;
+							that.movableObject.position = that.sheepDependents[i].position;
+						}
+					}
+					that.gameData.whoseMove='elephant';
+					that.sheepToMoveDep=false;
+					that.redrawGame();
+				}
 			}
 	}
 	function checkForSheeepsMove(shape,x,y){
@@ -424,7 +454,6 @@ GameView.prototype.waitForMatch = function(){
 	this.gameHeader.waitForMatch();
 }
 GameView.prototype.moveObject = function(interval){
-	//debugger;
 	var that = this;
 	if(!this.selectedObject && !this.movableObject ){
 		//this.updateMove( that.gameData, that.elephantName, that.sheepsName );
@@ -497,7 +526,6 @@ GameView.prototype.startNewGame= function(){
 	this.loadGame();
 }
 GameView.prototype.redrawGame = function(){
-	//debugger
 	this.gameData.movablePoints.forEach(function(item){
 		item.occupied = null;
 	});
@@ -554,7 +582,6 @@ GameView.prototype.checkForWin = function(){
 			}
 		}
 		if(!moveFound){
-			debugger;
 			if(confirm("**Sheep Wins**. Start New Game?")){
 				alert("sheep wins")
 				this.startNewGame();
