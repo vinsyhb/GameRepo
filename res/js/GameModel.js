@@ -1,5 +1,6 @@
 function GameModel(){
 	this.gameData = null;
+	//Testing
 }
 
 GameModel.prototype.getInitialGameData = function(canvasWidth, canvasHeight){
